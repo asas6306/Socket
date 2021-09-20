@@ -1,10 +1,10 @@
-package com.java.socket.j;
+package com.java.socket.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class time {
-	public String regDate() {
+public class Util {
+	public String getRegDate() {
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("[HH:mm]");
 		

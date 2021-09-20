@@ -12,8 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.java.socket.util.Util;
+
 public class Client {
-	time t = new time();
+	Util util = new Util();
 	
 	JFrame frame = new JFrame("Client");
 	JTextArea textArea = new JTextArea();
@@ -56,11 +58,11 @@ public class Client {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					sendMsgTServer("Client " + t.regDate() + " : " + inputText.getText());
+					sendMsgTServer("Client " + util.getRegDate() + " : " + inputText.getText());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				textArea.append("Client " + t.regDate() + " : " + inputText.getText() + "\n");
+				textArea.append("Client " + util.getRegDate() + " : " + inputText.getText() + "\n");
 				inputText.setText("");
 			}
 		});
@@ -74,24 +76,20 @@ public class Client {
 	
 	public DataInputStream connectInputStream() throws IOException {
 		inputStream = new DataInputStream(clientSocket.getInputStream());
-		System.out.println("clientInputStream");
 		return inputStream;
 	}
 	
 	public DataOutputStream connectOutputStream() throws IOException {
 		outputStream = new DataOutputStream(clientSocket.getOutputStream());
-		System.out.println("clientOutputStream");
 		return outputStream;
 	}
 	
 	public void sendMsgTServer(String msg) throws IOException {
 		outputStream.writeUTF(msg);
-		System.out.println("mTs");
 	}
 	
 	public String receiveMsgFServer() throws IOException {
 		String msg = inputStream.readUTF();
-		System.out.println("mFs");
 		return msg;
 	}
 	
